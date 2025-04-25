@@ -134,34 +134,34 @@ const carrinho = {
 
     <section class="lançamentos">
       <h2>Lançamentos</h2>
-      
+    <div class="imagem">
       <ul>
         <div>
         <li>
           <img src="/public/imagens/chainofIron.png" alt="Chain of Iron: Volume 2" />
           <h3>Chain of Iron: Volume 2</h3>
-          <p>Cassandra Clare</p>
+          <p class="nome">Cassandra Clare</p>
           <p>R$23.24</p>
           <button>Comprar</button>
         </li>
         <li>
           <img src="/public/imagens/chainofThorns.png" alt="Chain of Thorns" />
           <h3>Chain of Thorns</h3>
-          <p>Cassandra Clare</p>
+          <p class="nome">Cassandra Clare</p>
           <p>R$23.24</p>
           <button>Comprar</button>
         </li>
         <li>
           <img src="/public/imagens/cityoufallenalgels.png" alt="City of Fallen Angels" />
           <h3>City of Fallen Angels</h3>
-          <p>Cassandra Clare</p>
+          <p class="nome">Cassandra Clare</p>
           <p>R$13.94</p>
           <button>Comprar</button>
         </li>
         <li>
           <img src="/public/imagens/nonathenith.png" alt="Nona the Ninth" />
           <h3>Nona the Ninth</h3>
-          <p>Cassandra Clare</p>
+          <p class="nome">Cassandra Clare</p>
           <p>R$16.84</p>
           <button>Comprar</button>
         </li>
@@ -170,33 +170,35 @@ const carrinho = {
         <li>
           <img src="/public/imagens/harlemshuffle.png" alt="Harlem Shuffle<" />
           <h3>Harlem Shuffle</h3>
-          <p>Colson Whitehead</p>
+          <p class="nome">Colson Whitehead</p>
           <p>R$26.92</p>
           <button>Comprar</button>
         </li>
         <li>
           <img src="/public/imagens/twooldwoman.png" alt="Two Old Women" />
           <h3>Two Old Women</h3>
-          <p>Velma Wallis</p>
+          <p class="nome">Velma Wallis</p>
           <p>R$13.95</p>
           <button>Comprar</button>
         </li>
         <li>
           <img src="/public/imagens/carriesoto.png" alt="Carrie Soto Is Back" />
           <h3>Carrie Soto Is Back</h3>
-          <p>Taylor Jenkins Reid</p>
+          <p class="nome">Taylor Jenkins Reid</p>
           <p>R$26.04</p>
           <button>Comprar</button>
         </li>
         <li>
           <img src="/public/imagens/booklovers.png" alt="Book Lovers" />
           <h3>Book Lovers</h3>
-          <p>Emily Henry</p>
+          <p class="nome">Emily Henry</p>
           <p>R$15.81</p>
           <button>Comprar</button>
         </li>
       </div>
-      </ul>
+ 
+      </ul> 
+      </div>
     </section>
     <footer>
       <div>
@@ -344,13 +346,36 @@ header {
   font-weight: bolder;
   
 }
-.lançamentos {
+.lançamentos div.imagem{
   display: flex;
+  justify-content: center;
 }
 .lançamentos ul div{
 display: flex;
 }
 .lançamentos ul li {
-  margin: 0 3vw 0 0 ;
+  margin: 0 2vw 0 0 ;
+}
+.lançamentos h2{
+  color: black;
+  margin: 3vw 0 2vw 17vw;
+  font-size: 2rem;
+}
+.lançamentos h3{
+  font-weight: bold;
+  color: black;
+}
+.lançamentos p.nome{
+  color: gray;
+}
+.lançamentos p{
+  font-weight: bolder;
+  color: black;
+}
+.lançamentos button{
+  border-radius: 2px;
+  margin: 1vw 0 4vw 5vw;
+  padding: 0.5vw 6vw 0.5vw 6vw;
+
 }
 </style>
