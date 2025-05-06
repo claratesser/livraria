@@ -58,27 +58,28 @@ const produtos = [
   },
 ]
 
-/*const carrinho = {
-    items: [
-        {
-            id: 1,
-            nome: 'Livro 1',
-            preco: 49.9,
-            quantidade: 1,
-            valorTotal: 49.9,
-            },
-        {
-            id: 2,
-            nome: 'Livro 2',
-            preco: 99.9,
-            quantidade: 2,
-            valorTotal: 199.8,
-        },
-    ],
-    frete: 0,
-    desconto: 0,
-    total: 288.3,
-};*/
+const carrinho = {
+  items: [
+    {
+      id: 1,
+      nome: 'Chain of Iron: Volume 2',
+      preco: 23.24,
+      quantidade: 1,
+      valorTotal: 49.9,
+    },
+    {
+      id: 2,
+      nome: 'Livro 2',
+      preco: 99.9,
+      quantidade: 2,
+      valorTotal: 199.8,
+    },
+  ],
+  frete: 0,
+  desconto: 0,
+  total: 288.3,
+}
+
 </script>
 
 <template>
@@ -163,7 +164,7 @@ const produtos = [
           <img :src="produto.capa" alt="" width="100%" height="100%" />
           <h2>{{ produto.titulo }}</h2>
           <p class="res">{{ produto.resenha }}</p>
-          <strong>R$ {{ produto.preco.toFixed(2) }}</strong>
+          <strong class="preco-lancamento">R$ {{ produto.preco.toFixed(2) }}</strong>
           <br />
           <button class="compra">
             <p>comprar</p>
@@ -171,29 +172,46 @@ const produtos = [
         </div>
       </section>
 
+      <div class="carrinho">
+        <h2>Carrinho</h2>
+        <div class="categorias">
+          <p class="titulo">Titulo</p>
+          <p class="quantidade">Quantidade</p>
+          <p>Subtotal</p>
+        </div>
+        <ul>
+          <li>
+
+          </li>
+        </ul>
+        <button>
+          voltar para a loja
+        </button>
+      </div>
+
       <footer>
         <div>
-          <div >
+          <div>
             <h3>IFbooks</h3>
             <ul class="icones">
-              <li>
-                facebook <a href="#"><img src="" alt="" /></a>
+              <li><a href="#"><img src="/public/imagens/face.png" alt="" /></a>
               </li>
-              <li>instagram</li>
-              <li>twitter</li>
+              <li><a href="#"><img src="/public/imagens/insta.png" alt=""></a>
+              </li>
+              <li><a href="#"><img src="/public/imagens/tt.png" alt=""></a></li>
             </ul>
           </div>
           <div class="contato">
             <ul>
               <li><h4>Contato</h4></li>
-              <li>+55 47 40045263</li>
-              <li>8h às 23h - Seg a Sex</li>
-              <li>contato@ifbooks.com</li>
+              <li><img src="/public/imagens/Icon (1).png" alt="telefone">+55 47 40045263</li>
+              <li><img src="/public/imagens/Icon (2).png" alt="relogio">8h às 23h - Seg a Sex</li>
+              <li><img src="/public/imagens/Icon (4).png" alt="email">contato@ifbooks.com</li>
             </ul>
             <ul class="cartoes">
-              <li>cartao</li>
-              <li>cartao</li>
-              <li>cartao</li>
+              <li><img src="/public/imagens/paipal 1.png" alt="paipal"></li>
+              <li><img src="/public/imagens/MasterCard-Logo-1979 1.png" alt="mastercard"></li>
+              <li><img src="/public/imagens/VISA-card-logo- 1.png" alt="visa"></li>
             </ul>
           </div>
         </div>
@@ -220,11 +238,14 @@ header {
   align-items: center;
   gap: 10px;
 }
-
+body {
+  background-color: white;
+}
 .logo {
   font-weight: bold;
   font-size: 16px;
   margin: 0;
+  color: #231f2d;
 }
 
 .slogan {
@@ -259,6 +280,7 @@ header {
   font-size: 14px;
   display: flex;
   align-items: center;
+  color: #7B7881;
 }
 
 .nav-menu li img {
@@ -269,6 +291,7 @@ header {
   margin: 2vw 12vw;
   display: flex;
   align-items: center;
+  color: black;
 }
 .eric span.autor {
   border: solid 1.5px #27ae60;
@@ -322,7 +345,11 @@ header {
 .lançamentos {
   margin: 5vw;
 }
-
+.preco-lancamento {
+  color: #000000; 
+  font-size: 1.2rem;
+  font-weight: bold;
+}
 .lançamentos h2 {
   font-size: 2rem;
   color: #231f2d;
@@ -361,6 +388,27 @@ header {
   gap: 0.5rem;
   font-size: 1.1rem;
   margin-top: 1vw;
+}
+div.carrinho{
+  color: #000000;
+}
+div.carrinho h2{
+  color: #27ae60;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 5vw 0 3vw 6vw;
+}
+div.carrinho div.categorias{
+  display: flex;
+  margin: 0 0 0 6vw;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+div.carrinho div.categorias p.titulo{
+  margin: 0 35vw 0 0;
+}
+div.carrinho div.categorias p.quantidade{
+  margin: 0 20vw 0 0;
 }
 footer {
   background-color: #27ae60;
@@ -406,10 +454,13 @@ footer h4 {
 footer div ul.icones {
   display: flex;
 }
-footer div ul.cartoes{
+footer div ul.cartoes {
   display: flex;
 }
 footer div ul.cartoes li {
   margin: 3vw 1vw 0 0;
+}
+footer ul.icones li {
+  margin: 0 0.5vw ;
 }
 </style>
