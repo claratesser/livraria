@@ -1,4 +1,7 @@
 <script setup>
+
+import { ref } from 'vue';
+
 const produtos = [
   {
     id: 1,
@@ -58,28 +61,38 @@ const produtos = [
   },
 ]
 
-const carrinho = {
-  items: [
-    {
-      id: 1,
-      nome: 'Chain of Iron: Volume 2',
-      preco: 23.24,
-      quantidade: 1,
-      valorTotal: 49.9,
-    },
-    {
-      id: 2,
-      nome: 'Livro 2',
-      preco: 99.9,
-      quantidade: 2,
-      valorTotal: 199.8,
-    },
-  ],
-  frete: 0,
-  desconto: 0,
-  total: 288.3,
+const mostrarCarrinho = ref(false);
+const produtoSelecionado = ref(null);
+
+function abrirCarrinho(produto) {
+  produtoSelecionado.value = produto;
+  mostrarCarrinho.value = true;
 }
 
+function voltarParaLoja() {
+  mostrarCarrinho.value = false;
+}
+const carrinho = [
+  {
+    id: 7,
+    titulo: 'Carrie Soto Is Back',
+    resenha: 'Taylor Jenkins Reid',
+    preco: 26.04,
+    capa: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGJROWBwFV4AHVxK1H0NNVTiEBBlVbmnf2gg&s',
+  },
+  {
+    id: 8,
+    titulo: 'Book Lovers',
+    resenha: 'Emily Henry',
+    preco: 15.81,
+    capa: 'https://m.media-amazon.com/images/I/71Xy4AL7jKL.jpg',
+    quantidade: 1,
+  }
+];
+
+function diminuir(qnt) {
+
+}
 </script>
 
 <template>
@@ -102,28 +115,19 @@ const carrinho = {
           <li>Equipe</li>
           <li>Envio</li>
           <li>Devoluções</li>
-
-          <li>
-            <a href="#"><img src="/public/imagens/Download.png" alt="carrinho de compras" /></a>
-          </li>
-
-          <li class="dividir">|</li>
-
-          <li>
-            <a href="#"><img src="/public/imagens/heartactive.png" alt="coração" /></a>
-          </li>
-
-          <li class="dividir">|</li>
-
-          <li>
-            <a href="#"><img src="/public/imagens/User.png" alt="usuário" /></a>
-          </li>
         </ul>
       </nav>
+
+      <div class="elements">
+      <button class="barra" @click="abrirCarrinho(produto)"><img src="/public/imagens/Download.png" alt=""></button>
+      <button class="barra"><img src="/public/imagens/heartactive.png" alt=""></button>
+      <button><img src="/public/imagens/User.png" alt=""></button>
+    </div>
+
     </header>
 
     <main>
-      <section class="eric">
+      <section class="eric"  v-if="!mostrarCarrinho">
         <div class="texto">
           <span class="autor">Autor de abril</span>
           <h2>Eric-Emanuel Schmitt</h2>
@@ -139,7 +143,7 @@ const carrinho = {
         </div>
       </section>
 
-      <section class="lista">
+      <section class="lista"  v-if="!mostrarCarrinho">
         <ul>
           <li class="borda">
             <img src="/public/imagens/Icon.png" alt="caminhão" />
@@ -158,7 +162,7 @@ const carrinho = {
         </ul>
       </section>
 
-      <section class="lançamentos">
+      <section class="lançamentos"  v-if="!mostrarCarrinho">
         <h2>Lançamentos</h2>
         <div v-for="produto in produtos" :key="produto.id" class="livro">
           <img :src="produto.capa" alt="" width="100%" height="100%" />
@@ -172,23 +176,50 @@ const carrinho = {
         </div>
       </section>
 
-      <div class="carrinho">
-        <h2>Carrinho</h2>
-        <div class="categorias">
-          <p class="titulo">Titulo</p>
-          <p class="quantidade">Quantidade</p>
-          <p>Subtotal</p>
-        </div>
-        <ul>
-          <li>
-
-          </li>
-        </ul>
-        <button>
-          voltar para a loja
-        </button>
+    
+    <section class="carrinho" v-if="mostrarCarrinho">
+      <h2>Carrinho</h2>
+      <div class="classes">
+        <h3>Título</h3>
+        <h3 class="q">Quantidade</h3>
+        <h3>Subtotal</h3>
       </div>
 
+      <div class="compras" v-for="produto in carrinho" :key="produto.id">
+        <div>
+          <img :src="produto.capa" alt="" width="8%">
+          <div>
+            <h3>{{ produto.titulo }}</h3>
+            <p>{{ produto.resenha }}</p>
+            <p class="preco">R${{ produto.preco }}</p>
+          </div>
+        </div>
+
+        <div>
+          <button @click="">-</button>
+          <strong>{{ produto.quantidade }}</strong>
+          <button>+</button>
+        </div>
+
+
+      </div>
+      
+      <button class="Vloja" @click="voltarParaLoja">Voltar para a loja</button>
+      <div class="compra">
+        <div>
+          <input class="cupom" type="text" placeholder="código do cupom"> <input class="inserircpm" type="button"
+            value="Inserir Cupom">
+        </div>
+
+        <div class="final">
+          <h3>Total da Compra</h3>
+          <p class="linha">Produtos:</p>
+          <p class="linha">Frete:Grátis</p>
+          <p>Total: </p>
+          <input type="button" value="Ir para o pagamento">
+        </div>
+      </div>
+      </section>
       <footer>
         <div>
           <div>
@@ -389,27 +420,97 @@ body {
   font-size: 1.1rem;
   margin-top: 1vw;
 }
-div.carrinho{
-  color: #000000;
+.carrinho {
+  padding: 8vw;
+
 }
-div.carrinho h2{
-  color: #27ae60;
+
+.carrinho h2 {
+  color: #27AE60;
   font-size: 2rem;
-  font-weight: bold;
-  margin: 5vw 0 3vw 6vw;
+  margin: 1vw;
+  
 }
-div.carrinho div.categorias{
+
+.carrinho .classes {
   display: flex;
-  margin: 0 0 0 6vw;
-  font-size: 1.2rem;
+  justify-content: space-between;
+  border-bottom: 1px solid #27AE60;
+}
+
+.carrinho .classes h3 {
+  margin: 0 3vw 1vw;
+  font-size: 2rem;
+}
+
+.carrinho .classes .q {
+  margin-left: 16vw;
+}
+
+.carrinho .Vloja {
+  margin-top: 6vw;
+  border: 2px solid #aaaaaa;
+  background-color: white;
+  padding: 20px 60px;
+  border-radius: 5px;
   font-weight: bold;
+  font-size: 1.2rem;
 }
-div.carrinho div.categorias p.titulo{
-  margin: 0 35vw 0 0;
+
+.carrinho .cupom {
+  margin-top: 6vw;
+  border: 2px solid #000000;
+  background-color: white;
+  padding: 20px 60px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1.2rem;
 }
-div.carrinho div.categorias p.quantidade{
-  margin: 0 20vw 0 0;
+
+.carrinho .inserircpm {
+  margin-top: 6vw;
+  border: none;
+  background-color: #27AE60;
+  padding: 20px 60px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: white;
+  margin-left: 1vw;
 }
+
+.carrinho .compra {
+  display: flex;
+}
+
+.carrinho .final {
+  border: 2px solid black;
+  margin-left: 28vw;
+  margin-top: 6vw;
+  padding: 1vw;
+  border-radius: 5px;
+}
+
+.carrinho .final h3 {
+  font-size: 1.6rem;
+}
+
+.carrinho .final .linha {
+  border-bottom: 1px solid #000000;
+  padding-right: 17vw;
+  padding-bottom: 1vw;
+}
+
+.carrinho .final input {
+  background-color: #27AE60;
+  color: white;
+  border: none;
+  padding: 20px 40px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  margin-left: 3vw;
+}
+
 footer {
   background-color: #27ae60;
   color: white;
@@ -463,4 +564,5 @@ footer div ul.cartoes li {
 footer ul.icones li {
   margin: 0 0.5vw ;
 }
+
 </style>
